@@ -39,4 +39,4 @@ if __name__ == "__main__":
     main('day1/data.txt')
 
 
-# was tought for me... (bruted this one)
+# was tought for me...
