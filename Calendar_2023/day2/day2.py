@@ -11,38 +11,36 @@ def extract_color_counts(colors):
 
 def evaluate_game(game_data):
     sets = game_data.split(';')
-    max_counts = {}
-
     for game_set in sets:
         colors = game_set.split(',')
         color_counts = extract_color_counts(colors)
-
-        for color, count in color_counts.items():
-            print(color, count, max_counts)
-
-            if color not in max_counts or count > max_counts[color]:
-                max_counts[color] = count
-    return count_score_multiplier(max_counts)
+        if check_limits(color_counts):
+            return True
+    return False
 
 
-def count_score_multiplier(max_counts):
-    product = 1
-    for count in max_counts.values():
-        product *= count
-    return product
+def check_limits(color_counts):
+    red_limit = 12
+    green_limit = 13
+    blue_limit = 14
+    return (
+        color_counts.get('red', 0) > red_limit
+        or color_counts.get('green', 0) > green_limit
+        or color_counts.get('blue', 0) > blue_limit
+    )
 
 
 def process_games(file_path):
-    score_list = []
+    legit_games = []
     with open(file_path, 'r') as file:
         data = file.read()
     games = data.split('Game ')[1:]
     for game in games:
-        game_data = game.split(':', 1)
-        game_score = evaluate_game(game_data[1])
-        score_list.append(game_score)
-    print(sum(score_list))
+        game_number, game_data = game.split(':', 1)
+        if not evaluate_game(game_data):
+            legit_games.append(int(game_number))
+    print(sum(legit_games))
 
 
 if __name__ == "__main__":
-    process_games('day2/data.txt')
+    process_games('Calendar_2023/day2/data.txt')

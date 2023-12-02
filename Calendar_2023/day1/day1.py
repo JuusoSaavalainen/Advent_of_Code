@@ -33,4 +33,4 @@ def sum_calibration(path):
 
 
 if __name__ == "__main__":
-    sum_calibration('day1/data.txt')
+    sum_calibration('Calendar_2023/day1/data.txt')

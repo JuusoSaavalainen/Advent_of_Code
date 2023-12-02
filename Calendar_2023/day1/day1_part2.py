@@ -36,7 +36,7 @@ def main(path):
 
 
 if __name__ == "__main__":
-    main('day1/data.txt')
+    main('Calendar_2023/day1/data.txt')
 
 
 # was tought for me...
