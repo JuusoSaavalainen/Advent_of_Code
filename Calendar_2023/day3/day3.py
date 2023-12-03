@@ -1,12 +1,8 @@
-
-
 def main(path):
     with open(path, 'r') as file:
         data = file.read()
     datagrid = data.splitlines()
     positions = set()
-    # never nesters hate this implementation
-    # atleast it is way easier than finding the number first
     for r, row in enumerate(datagrid):
         for c, char in enumerate(row):
             if char == "." or char.isdigit():
@@ -16,7 +12,6 @@ def main(path):
                 for cur_col in [c - 1, c, c + 1]:
                     if not datagrid[cur_row][cur_col].isdigit():
                         continue
-                    # out of bounds ? skip
                     if cur_row < 0 or cur_col >= len(datagrid):
                         continue
                     if cur_col < 0 or cur_col >= len(datagrid[cur_row]):
