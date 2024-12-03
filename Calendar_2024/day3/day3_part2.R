@@ -5,7 +5,7 @@ library(dplyr)
 text <- paste(readLines("data.txt"), collapse = "\n")
 do_pattern <- "don't\\(\\)[\\s\\S]*?do\\(\\)"
 re_pattern <- "mul\\((\\d{1,3}),(\\d{1,3})\\)"
-result <- gsub(do_pattern, "", text, perl = TRUE)
+result <- str_remove_all(text, do_pattern)
 
 total_sum <- result %>%
   str_extract_all(re_pattern) %>%
